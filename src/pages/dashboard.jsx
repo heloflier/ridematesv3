@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios";
+import { Button } from 'reactstrap';
 
 import RidesList from '../components/RidesList';
 import { StoreContext } from '../stores/store-context';
@@ -29,6 +30,15 @@ const DashboardPage = () => {
 
   return (
     <div>
+      <div className='d-flex justify-content-end'>
+        <Button
+          size='lg'
+          color=''
+          className='std-theme'
+          >
+          Create a new ride!
+        </Button>
+      </div>
       <RidesList ridesList={ridesList} />
     </div>
   );

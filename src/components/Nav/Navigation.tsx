@@ -34,9 +34,9 @@ function Navigation() {
     <Navbar
       dark
       expand='md'
-      className='heading-primary'
+      className='std-theme heading-primary'
     >
-      <NavbarBrand href="/" color="primary" className='heading-primary--brand fs-1 fst-italic px-5'>
+      <NavbarBrand href="/" className='heading-primary--brand fs-1 fst-italic px-5'>
         RIDEMATES
       </NavbarBrand>
 
@@ -59,12 +59,12 @@ function Navigation() {
             </DropdownToggle>
             <DropdownMenu end>
               <DropdownItem className='color-primary'>
-                <NavLink href="/pages/profile" className="text-dark">
+                <NavLink href="/profile" className="text-dark">
                   Profiles
                 </NavLink>
               </DropdownItem>
               <DropdownItem>
-                <NavLink href="/pages/ride" className="text-dark">
+                <NavLink href="/ride" className="text-dark">
                   Ride
                 </NavLink>
               </DropdownItem>

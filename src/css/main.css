@@ -30,7 +30,7 @@ body {
   font-weight: 400;
   text-transform: uppercase;
   backface-visibility: hidden;
-  margin-bottom: 6rem;
+  margin-bottom: 3rem;
 }
 .heading-primary--brand {
   font-size: large;
@@ -38,8 +38,9 @@ body {
   letter-spacing: 0.3rem;
 }
 
-.navbar {
-  background-color: #fc5200;
+.std-theme {
+  background-color: #fc5200 !important;
+  color: #fff !important;
 }
 
 /*!
