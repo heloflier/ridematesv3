@@ -3,7 +3,7 @@ import axios from "axios";
 
 import RidesList from '../components/RidesList';
 import { StoreContext } from '../stores/store-context';
-import { DASHBOARD } from '../components/helper_assets/menu-tab-values';
+import { DASHBOARD } from '../helper_assets/menu-paths';
 
 const DashboardPage = () => {
 

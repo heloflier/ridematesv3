@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { StoreContext } from '../../stores/store-context';
 
-import navigationMenuItems from '../helper_assets/navigation-menu';
+import navigationMenuItems from '../../helper_assets/navigation-menu';
 
 function Navigation() {
 
@@ -15,17 +15,16 @@ function Navigation() {
 
   const store = useContext(StoreContext); 
 
+
   const renderNavItems = navigationMenuItems
-    .filter(menuItem => menuItem.tabName != store.currentPage)
+    .filter(menuItem => menuItem.navItemPath != store.currentPage)
     .map( (menuItem, index) => {
-      let pagePath;
-      let { tabUrl, tabName, tabPage } = menuItem;
-      tabPage === undefined? pagePath = tabName : pagePath = tabPage;
+      let { navItemTitle, navItemPath, navItemUrl } = menuItem;
 
       return (
-        <NavItem key={index}>
-          <NavLink href={`${tabUrl ? tabUrl : '/' + pagePath}`}>
-            {tabName}
+        <NavItem key={index} className="mx-3">
+          <NavLink href={`${ navItemUrl ? navItemUrl : '/' + navItemPath}`}>
+            {navItemTitle}
           </NavLink>
         </NavItem>
       )

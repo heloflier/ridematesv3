@@ -7,10 +7,13 @@ import {
   Route
 } from "react-router-dom";
 
+import { DASHBOARD, PROFILE, RIDE, USER_RIDES } from './helper_assets/menu-paths';
+
 import Navigation from './components/Nav/Navigation';
 import ProfilePage from './pages/profile';
 import RidePage from './pages/ride';
 import DashboardPage from './pages/dashboard';
+import UserRidelistPage from './pages/userRides';
 
 class App extends Component {
   render() {
@@ -19,9 +22,10 @@ class App extends Component {
       <Router>
         <Navigation />
         <Routes>
-          <Route exact path="/" element={<DashboardPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/ride" element={<RidePage />} />
+          <Route exact path={DASHBOARD} element={<DashboardPage />} />
+          <Route path={`/${PROFILE}`} element={<ProfilePage />} />
+          <Route path={`/${RIDE}`} element={<RidePage />} />
+          <Route path={`/${USER_RIDES}`} element={<UserRidelistPage />} />
         </Routes>
       </Router>
     )

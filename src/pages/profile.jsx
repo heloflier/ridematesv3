@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import UserProfile from '../components/UserProfile';
-import { PROFILE } from '../components/helper_assets/menu-tab-values';
+import { PROFILE } from '../helper_assets/menu-paths';
 
 import { StoreContext } from '../stores/store-context';
 

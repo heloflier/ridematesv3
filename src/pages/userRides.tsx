@@ -1,16 +1,17 @@
 import React, { useContext } from 'react';
 
-import { RIDE } from '../helper_assets/menu-paths';
+import { USER_RIDES } from '../helper_assets/menu-paths';
 import { StoreContext } from '../stores/store-context';
 
-function RidePage() {
+function UserRidelistPage() {
 
   const store = useContext(StoreContext);
-  store.setCurrentPage(RIDE);
+  store.setCurrentPage(USER_RIDES);
 
   return (
     <div>
-      <h1>Ride Page</h1>
+      <h1>
+        User Rides Page</h1>
     </div>
   );
 }
@@ -19,4 +20,4 @@ function RidePage() {
 //     classes: PropTypes.object.isRequired,
 //   };
 
-export default RidePage;
+export default UserRidelistPage;
