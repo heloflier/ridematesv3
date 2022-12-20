@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from "axios";
-import { Button } from 'reactstrap';
+import { Button, NavLink } from 'reactstrap';
 
 import RidesList from '../components/RidesList';
 import { StoreContext } from '../stores/store-context';
-import { DASHBOARD } from '../helper_assets/menu-paths';
+import { DASHBOARD, CREATE_RIDE } from '../helper_assets/menu-paths';
 
 const DashboardPage = () => {
 
@@ -31,13 +31,16 @@ const DashboardPage = () => {
   return (
     <div>
       <div className='d-flex justify-content-end'>
-        <Button
-          size='lg'
-          color=''
-          className='std-theme'
-          >
-          Create a new ride!
-        </Button>
+        <NavLink href={`/${CREATE_RIDE}`}>
+          <Button
+            size='lg'
+            color=''
+            className='std-theme'
+            onClick={()=> console.log('clicked enter new ride')}
+            >
+            Create a new ride!
+          </Button>
+        </NavLink>
       </div>
       <RidesList ridesList={ridesList} />
     </div>
