@@ -90,7 +90,7 @@ app.use(logger('dev'));
 // app.use("/api/request", requestRoutes);
 // app.use("/api/results", resultsRoutes);
 
-app.get('/api/profile', function(request, response) {
+app.get('/api/user', function(request, response) {
   response.send(`<h1>ciao</h1`);
 });
 

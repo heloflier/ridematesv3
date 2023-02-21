@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Button, Card, CardBody, CardHeader, CardTitle, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
 
 
@@ -31,8 +32,19 @@ import { Button, Card, CardBody, CardHeader, CardTitle, Col, Form, FormGroup, In
     //       <li>difficulty</li>
     //     </ul>
 
-
 function UserProfile() { 
+  const [user, setUser] = useState([]);
+
+  useEffect(async () => {
+    console.log('in useeffect');
+    const user = await axios(
+      '/api/user',
+    );
+
+    console.log('user.data: ', user.data);
+    setUser(user.data);
+  }, []);
+
   return (
     <div className='container'>
       <Card className='mb-3'>
