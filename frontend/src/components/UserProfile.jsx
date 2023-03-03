@@ -35,14 +35,12 @@ import { Button, Card, CardBody, CardHeader, CardTitle, Col, Form, FormGroup, In
 function UserProfile() { 
   const [user, setUser] = useState([]);
 
-  useEffect(async () => {
+  useEffect(() => {
     console.log('in useeffect');
-    const user = await axios(
-      '/api/user',
+    axios
+      .get('/api/user')
+      .then(res => setUser(res.data)
     );
-
-    console.log('user.data: ', user.data);
-    setUser(user.data);
   }, []);
 
   return (
