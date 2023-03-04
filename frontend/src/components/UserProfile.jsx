@@ -38,7 +38,7 @@ function UserProfile() {
   useEffect(() => {
     console.log('in useeffect');
     axios
-      .get('/api/user')
+      .get('/api/user/1')
       .then(res => setUser(res.data)
     );
   }, []);

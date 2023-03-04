@@ -1,10 +1,7 @@
+
 import { Router, Request, Response} from 'express';
 
 const router = Router();
-
-//=================================================
-// 	displaying all the requests for a user
-//=================================================
 
 router.get('/:id', async (req: Request, res: Response) => {
 	console.log('-----------  GET profile');
