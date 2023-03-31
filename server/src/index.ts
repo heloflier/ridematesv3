@@ -3,49 +3,45 @@
 //								Main Server File
 //=============================================================================
 
-// adding dependencies
+import * as dotenv from 'dotenv';
+dotenv.config();
 import express, { Request, Response } from 'express';
 import { router } from './routes/loginRoutes';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 import morgan from 'morgan';
-import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+
 	  // passport				= require('passport'),
 	  // cookieParser			= require('cookie-parser'),
 	  // LocalStrategy 		= require('passport-local').Strategy,
 	  // passportLocalMongoose = require('passport-local-mongoose'),
 	  // session				= require('express-session'),
-	  // mongoose 				= require("mongoose"),
-	  // logger 				= require('morgan'),
-	  // User					= require('./models/User'),
 	  // path                  = require('path'),
 	  // keys					= require('./config/prod');
 
-dotenv.config();
+import User from './models/User';
 
 const app = express();
 
 const logger = morgan;
 
-// Set up a default port, configure mongoose, configure our middleware
 const PORT = process.env.PORT || 4000;
 
-// // Connect mongoose to our database
-// const db = process.env.MONGODB_URI || "mongodb://localhost/ridemate";
-
-// mongoose.connect(db, function(error) {
-// 	if (error) {
-// 		console.error(error);
-// 	}
-// 	else {
-// 		console.log("mongoose connection is successful");
-// 	}
-// });
+// TODO:	manage errors if connection unsuccessful
+if (process.env.MONGODB_DEV_URI) {
+	const db: string = process.env.MONGODB_DEV_URI || "mongodb://localhost/ridematesv3";
+	mongoose.connect(db)
+		.then(() => {
+			console.log("\n***** mongoose connection is successful *****\n");
+		}
+	);
+}
+else console.log('\n----------------  no connection to MongoDB\n');
 
 // // Priority serve any static files.
 // app.use(express.static(path.resolve(__dirname, './client/build')));
 
-// // Body Parser configuration
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieSession({ keys: ['adsflf'] }));
@@ -97,8 +93,18 @@ app.use("/api/rides", ridesRoutes);
 //   response.send(`<h1>ciao</h1`);
 // });
 
+// TODO: TEST ONLY - REMOVE WHEN DONE
+const user = new User({
+	firstName: 'Bob',
+	lastName: 'Bobbinson'
+});
+
+user.save();
+// END TODO
+
 // Start the server
 app.listen(PORT, function() {
-	console.log('=============================================================');
-  	console.log("Now listening on port %s! Visit localhost:%s in your browser.", PORT, PORT);
+	console.log('\n==================================================================');
+  console.log(`Now listening on port ${PORT}! Visit localhost:${PORT} in your browser.`);
+	console.log('==================================================================\n');
 });
