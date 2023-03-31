@@ -9,7 +9,7 @@ import { router } from './routes/loginRoutes';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 import morgan from 'morgan';
-	  // dotenv 				= require('dotenv').config(),
+import dotenv from 'dotenv';
 	  // passport				= require('passport'),
 	  // cookieParser			= require('cookie-parser'),
 	  // LocalStrategy 		= require('passport-local').Strategy,
@@ -21,6 +21,8 @@ import morgan from 'morgan';
 	  // path                  = require('path'),
 	  // keys					= require('./config/prod');
 
+dotenv.config();
+
 const app = express();
 
 const logger = morgan;
@@ -30,7 +32,6 @@ const PORT = process.env.PORT || 4000;
 
 // // Connect mongoose to our database
 // const db = process.env.MONGODB_URI || "mongodb://localhost/ridemate";
-// //  mongodb://heroku_wdqxr1c7:u11s28d9stv360c6r6o83kt5g2@ds141454.mlab.com:41454/heroku_wdqxr1c7
 
 // mongoose.connect(db, function(error) {
 // 	if (error) {
@@ -83,16 +84,18 @@ app.use(logger('dev'));
 // const authRoutes = require("./controllers/authController.js");
 // const requestRoutes = require("./controllers/requestController.js");
 // const resultsRoutes = require("./controllers/resultsController.js");
-// import profileRoutes from "../controllers/profileController";
+import profileRoutes from "./controllers/profileController";
+import ridesRoutes from "./controllers/ridesController";
 
 
-// app.use("/api/profile", profileRoutes);
+app.use("/api/user", profileRoutes);
+app.use("/api/rides", ridesRoutes);
 // app.use("/api/request", requestRoutes);
 // app.use("/api/results", resultsRoutes);
 
-app.get('/api/profile', function(request, response) {
-  response.send(`<h1>ciao</h1`);
-});
+// app.get('/api/user', function(request, response) {
+//   response.send(`<h1>ciao</h1`);
+// });
 
 // Start the server
 app.listen(PORT, function() {
