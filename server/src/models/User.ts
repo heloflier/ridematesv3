@@ -31,7 +31,7 @@ const userSchema = new Schema({
 		type: 		Date,
 		required: false
 	}
-})
+});
 
 // UserSchema.plugin(passportLocalMongoose);
 // UserSchema.methods.encryptPassword = function(password) {
