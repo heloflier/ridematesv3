@@ -94,17 +94,17 @@ app.use("/api/rides", ridesRoutes);
 // });
 
 // TODO: TEST ONLY - REMOVE WHEN DONE
-const user = new User({
-	firstName: 'Bob',
-	lastName: 'Bobbinson'
-});
+// const user = new User({
+// 	firstName: 'Bob',
+// 	lastName: 'Bobbinson'
+// });
 
-user.save();
+// user.save();
 // END TODO
 
 // Start the server
 app.listen(PORT, function() {
 	console.log('\n==================================================================');
   console.log(`Now listening on port ${PORT}! Visit localhost:${PORT} in your browser.`);
-	console.log('==================================================================\n');
+	console.log('\n==================================================================\n');
 });
