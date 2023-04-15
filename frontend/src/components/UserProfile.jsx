@@ -35,13 +35,27 @@ import { Button, Card, CardBody, CardHeader, CardTitle, Col, Form, FormGroup, In
 function UserProfile() { 
   const [user, setUser] = useState([]);
 
+  // TODO: the following is just an experiment to test the db. modify when done.
   useEffect(() => {
-    console.log('in useeffect');
+    const userId = "64275075798a59db3b803cba";
     axios
-      .get('/api/user/1')
-      .then(res => setUser(res.data)
+      .get(`/api/user/${userId}`)
+      .then(res => {
+        setUser(res.data);
+      }
     );
   }, []);
+
+  const onFormSubmit = () => {
+    console.log('**************** in create user');
+    // axios
+    //   .post('/api/user/create')
+    //   .then(res => {
+    //     setUser(res.data);
+    //     console.log(res.data);
+    //   }
+    // );
+  }
 
   return (
     <div className='container'>
@@ -54,7 +68,7 @@ function UserProfile() {
         </CardHeader>
 
         <CardBody>
-          <Form className='m-3'>
+          <Form className='m-3' onSubmit={onFormSubmit}>
 
           <Row>
               <Col md={6}>
@@ -65,6 +79,7 @@ function UserProfile() {
                   <Input
                     id="js-profile-form-firstName"
                     name="firstName"
+                    value={user.firstName}
                   />
                 </FormGroup>
               </Col>
@@ -76,6 +91,7 @@ function UserProfile() {
                   <Input
                     id="js-profile-form-lastName"
                     name="lastName"
+                    value={user.lastName}
                   />
                 </FormGroup>
               </Col>
@@ -259,23 +275,22 @@ function UserProfile() {
                   check
                   inline
                 >
-                  <Input type="checkbox" />
+                  <Input type="checkbox" className='mb-5' />
                   <Label check>
                     Hard
                   </Label>
                 </FormGroup>
               </Form>
             </Row>
-
+      
+            <Button color='primary'>
+              Submit
+            </Button>
           </Form>
         </CardBody>
 
       </Card>
 
-      
-      <Button color='primary'>
-        Sign in
-      </Button>
     </div>
   );
 }

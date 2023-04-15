@@ -28,14 +28,13 @@ const logger = morgan;
 
 const PORT = process.env.PORT || 4000;
 
-// TODO:	manage errors if connection unsuccessful
 if (process.env.MONGODB_DEV_URI) {
 	const db: string = process.env.MONGODB_DEV_URI || "mongodb://localhost/ridematesv3";
 	mongoose.connect(db)
 		.then(() => {
 			console.log("\n***** mongoose connection is successful *****\n");
-		}
-	);
+		})
+		.catch(error => { throw error });
 }
 else console.log('\n----------------  no connection to MongoDB\n');
 
@@ -80,7 +79,7 @@ app.use(logger('dev'));
 // const authRoutes = require("./controllers/authController.js");
 // const requestRoutes = require("./controllers/requestController.js");
 // const resultsRoutes = require("./controllers/resultsController.js");
-import profileRoutes from "./controllers/profileController";
+import profileRoutes from "./controllers/userController";
 import ridesRoutes from "./controllers/ridesController";
 
 
@@ -106,5 +105,5 @@ app.use("/api/rides", ridesRoutes);
 app.listen(PORT, function() {
 	console.log('\n==================================================================');
   console.log(`Now listening on port ${PORT}! Visit localhost:${PORT} in your browser.`);
-	console.log('\n==================================================================\n');
+	console.log('==================================================================');
 });
