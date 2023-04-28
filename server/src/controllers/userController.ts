@@ -1,4 +1,5 @@
 import { Router, Request, Response} from 'express';
+import User from '../models/User';
 
 const router = Router();
 
@@ -7,9 +8,10 @@ const router = Router();
 //=================================================
 
 router.get('/:id', async (req: Request, res: Response) => {
-	console.log('-----------  GET profile');
-	res.json('response from GET server');
-	// const requests = await Email.find({ _user: req.user.id })
+	console.log('-----------  GET user', req.params.id);
+	const user = await User.findById(req.params.id);
+	res.json(user);
+	console.log('user: ', user);
 	// 	// .select({
 	// 		// recipients: false
 	// 	// })
@@ -21,17 +23,17 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post("/create", async (req: Request, res: Response) => {
-	console.log('----------- POST profile');
+	console.log('----------- POST user');
 	res.json('response from POST server');
 });
 
 router.put("/edit/:id", async (req: Request, res: Response) => {
-	console.log('-----------  PUT profile');
+	console.log('-----------  PUT user');
 	res.json('response from PUT server');
 });
 
 router.delete("/delete/:id", async (req: Request, res: Response) => {
-	console.log('-----------  DELETE profile');
+	console.log('-----------  DELETE user');
 	res.json('response from DELETE server');
 });
 
