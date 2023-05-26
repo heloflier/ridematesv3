@@ -15,11 +15,13 @@ const userSchema = new Schema({
 	firstName: 	String,
 	lastName: 	String,
 	address: 		String,
+	address2: 	String,
 	city: 			String,
 	state: 			String,
 	zipcode: 		Number,
 	email: 			String,
 	phoneNum: 	Number,
+	notify:			Boolean,
 	radius: 		Number,
 	coordinates: {
 		lat: Number,

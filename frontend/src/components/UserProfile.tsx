@@ -8,40 +8,30 @@ import UserForm from './forms/UserForm';
 export interface FormFields {
   firstName: string;
   lastName: string;
+  address: string,
+  address2: string,
+  city: string,
+  state: string,
+  zipcode: number,
+  email: string,
+  phonenum: number,
+  notify: boolean,
+  radius: number,
+  rideType: {
+    road: boolean,
+    mountain: boolean,
+    other: boolean
+  },
+  difficulty: {
+    easy: boolean,
+    medium: boolean, 
+    hard: boolean 
+  }
 }
 
 export interface userFormProps {
   readOnly?: boolean
 }
-
-    // this.setState = {
-    //   firstname: '',
-    //   lastname: '',
-    //   address: '',
-    //   city: '',
-    //   state: '',
-    //   zipcode: '',
-    //   email: '',
-    //   phonenum: '',
-    //   radius: '',
-    //   rideType: {},
-    //   difficulty: {}
-    // };
-
-    // <ul>
-    //       <li>first name</li>
-    //       <li>last name</li>
-    //       <li>address 1</li>
-    //       <li>address 2</li>
-    //       <li>city</li>
-    //       <li>state</li>
-    //       <li>zip</li>
-    //       <li>email</li>
-    //       <li>phonenum</li>
-    //       <li>radius</li>
-    //       <li>rideType</li>
-    //       <li>difficulty</li>
-    //     </ul>
 
 function UserProfile() { 
   const [user, setUser] = useState([]);
@@ -76,7 +66,26 @@ function UserProfile() {
     reValidateMode: 'onChange',
     defaultValues: {
       firstName: 'Bob',
-      lastName: 'Bobbinson'
+      lastName: 'Bobbinson',
+      address: '123 Disneyland Lane',
+      address2: 'second floor',
+      city: 'Redlands',
+      state: 'California',
+      zipcode: 10123,
+      email: 'bob@bob.com',
+      phonenum: 7022223333,
+      notify: true,
+      radius: 10,
+      rideType: {
+        road: false, 
+        mountain: false, 
+        other: false
+      },
+      difficulty: {
+        hard: false, 
+        medium: false, 
+        easy: false
+      }
     }
   });
 
@@ -102,12 +111,6 @@ function UserProfile() {
           
         </Form>
       </div>
-      {/* <input {...register('firstName')} />
-      <input {...register('lastName', { required: true })} />
-      {errors.lastName && <p>Last name is required.</p>}
-      <input {...register('age', { pattern: /\d+/ })} />
-      {errors.age && <p>Please enter number for age.</p>}
-      <input type="submit" /> */}
     </FormProvider>
   );
 }
