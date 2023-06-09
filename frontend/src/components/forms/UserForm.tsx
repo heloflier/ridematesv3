@@ -5,6 +5,7 @@ import { FormFields, userFormProps } from '../UserProfile';
 
 export default function UserForm({ readOnly }: userFormProps) {
   const { control, formState: { errors } } = useFormContext<FormFields>();
+  const rideTypeChoices = ['road', 'mountain', 'other'];
 
   return (
     <Card className='mb-3'>
@@ -426,211 +427,241 @@ export default function UserForm({ readOnly }: userFormProps) {
           />
 
           
-          <h5 className='my-3'>Ride type</h5>
+          <h5 className='my-3 mt-5'>Ride type</h5>
+          
+          {/* <Row>
+            <Controller
+              control={control}
+              name="rideType.road"
+              render={({
+                field: { onChange, onBlur, value }
+              }) => (
+                readOnly && value === true? 
+                  <span className='pe-3 col-2 fw-bold fst-italic'>ROAD</span>
+                :
+                  <Col md={4}>
+                    <FormGroup check inline>
+                      <Label 
+                        className='me-3'
+                        for="rideTypeRoad"
+                      >
+                        Road
+                      </Label>
+                      <Input
+                        id="js-profile-form-ride-type-road"
+                        name="rideTypeRoad"
+                        type="checkbox"
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        checked={value}
+                        invalid={errors.rideType?.road?.message ? true : false}
+                        data-lpignore="true"
+                      />
+                    </FormGroup>
+                  </Col>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="rideType.mountain"
+              render={({
+                field: { onChange, onBlur, value }
+              }) => (
+                readOnly?
+                  <span className='pe-3 col-2 fw-bold fst-italic'>{value === true && 'MOUNTAIN'}</span>
+                :
+                  <Col md={4}>
+                    <FormGroup check inline>
+                      <Label 
+                        className='me-3'
+                        for="rideTypemountain"
+                      >
+                        Mountain
+                      </Label>
+                      <Input
+                        id="js-profile-form-ride-type-mountain"
+                        name="rideTypemountain"
+                        type="checkbox"
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        checked={value}
+                        invalid={errors.rideType?.mountain?.message ? true : false}
+                        data-lpignore="true"
+                      />
+                    </FormGroup>
+                  </Col>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="rideType.other"
+              render={({
+                field: { onChange, onBlur, value }
+              }) => (
+                readOnly? 
+                  <span className='pe-3 col-2 fw-bold fst-italic'>{value === true && 'OTHER'}</span>
+                :
+                  <Col md={4}>
+                    <FormGroup check inline>
+                      <Label 
+                        className='me-3'
+                        for="rideTypeother"
+                      >
+                        Other
+                      </Label>
+                      <Input
+                        id="js-profile-form-ride-type-other"
+                        name="rideTypeother"
+                        type="checkbox"
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        checked={value}
+                        invalid={errors.rideType?.other?.message ? true : false}
+                        data-lpignore="true"
+                      />
+                    </FormGroup>
+                  </Col>
+              )}
+            />
+          </Row>
+
+          <h5 className='my-3 mt-5'>Ride difficulty</h5>
+
+          <Row>
+            <Controller
+              control={control}
+              name="difficulty.easy"
+              render={({
+                field: { onChange, onBlur, value }
+              }) => (
+                readOnly? 
+                  <span className='pe-3 col-2 fw-bold fst-italic'>{value === true && 'EASY'}</span>
+                :
+                  <Col md={6}>
+                    <FormGroup check inline>
+                      <Label 
+                        className='me-3'
+                        for="difficultyeasy"
+                      >
+                        Easy
+                      </Label>
+                      <Input
+                        id="js-profile-form-ride-type-easy"
+                        name="difficultyEasy"
+                        type="checkbox"
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        checked={value}
+                        invalid={errors.difficulty?.easy?.message ? true : false}
+                        data-lpignore="true"
+                      />
+                    </FormGroup>
+                  </Col>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="difficulty.medium"
+              render={({
+                field: { onChange, onBlur, value }
+              }) => (
+                readOnly? 
+                  <span className='pe-3 col-2 fw-bold fst-italic'>{value === true && 'MEDIUM'}</span>
+                :
+                  <Col md={6}>
+                    <FormGroup check inline>
+                      <Label 
+                        className='me-3'
+                        for="difficultymedium"
+                      >
+                        Medium
+                      </Label>
+                      <Input
+                        id="js-profile-form-ride-type-medium"
+                        name="difficultyMedium"
+                        type="checkbox"
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        checked={value}
+                        invalid={errors.difficulty?.medium?.message ? true : false}
+                        data-lpignore="true"
+                      />
+                    </FormGroup>
+                  </Col>
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="difficulty.hard"
+              render={({
+                field: { onChange, onBlur, value }
+              }) => (
+                readOnly? 
+                  <span className='pe-3 col-2 fw-bold fst-italic'>{value === true && 'HARD'}</span>
+                :
+                  <Col md={6}>
+                    <FormGroup check inline>
+                      <Label 
+                        className='me-3'
+                        for="difficultyHard"
+                      >
+                        Hard
+                      </Label>
+                      <Input
+                        id="js-profile-form-ride-type-hard"
+                        name="difficultyhard"
+                        type="checkbox"
+                        onChange={onChange}
+                        onBlur={onBlur}
+                        checked={value}
+                        invalid={errors.difficulty?.hard?.message ? true : false}
+                        data-lpignore="true"
+                      />
+                    </FormGroup>
+                  </Col>
+              )}
+            />         
+          </Row> */}
+          
+          <h1>TEST TEST TEST</h1>
           
           <Controller
             control={control}
-            name="rideType.road"
+            name="rideType"
             render={({
               field: { onChange, onBlur, value }
             }) => (
-              readOnly? 
-                <p>
-                  <span className='pe-3 col-2'>{value === true && 'ROAD'}</span>
-                </p>
-              :
-                <Col md={6}>
-                  <FormGroup check inline>
-                    <Label 
-                      className='me-3'
-                      for="rideTypeRoad"
-                    >
-                      Road
-                    </Label>
-                    <Input
-                      id="js-profile-form-ride-type-road"
-                      name="rideTypeRoad"
-                      type="checkbox"
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      checked={value}
-                      invalid={errors.rideType?.road?.message ? true : false}
-                      data-lpignore="true"
-                    />
-                  </FormGroup>
-                </Col>
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="rideType.mountain"
-            render={({
-              field: { onChange, onBlur, value }
-            }) => (
-              readOnly? 
-                <p>
-                  <span className='pe-3 col-2'>{value === true && 'MOUNTAIN'}</span>
-                </p>
-              :
-                <Col md={6}>
-                  <FormGroup check inline>
-                    <Label 
-                      className='me-3'
-                      for="rideTypemountain"
-                    >
-                      Mountain
-                    </Label>
-                    <Input
-                      id="js-profile-form-ride-type-mountain"
-                      name="rideTypemountain"
-                      type="checkbox"
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      checked={value}
-                      invalid={errors.rideType?.mountain?.message ? true : false}
-                      data-lpignore="true"
-                    />
-                  </FormGroup>
-                </Col>
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="rideType.other"
-            render={({
-              field: { onChange, onBlur, value }
-            }) => (
-              readOnly? 
-                <p>
-                  <span className='pe-3 col-2'>{value === true && 'OTHER'}</span>
-                </p>
-              :
-                <Col md={6}>
-                  <FormGroup check inline>
-                    <Label 
-                      className='me-3'
-                      for="rideTypeother"
-                    >
-                      Other
-                    </Label>
-                    <Input
-                      id="js-profile-form-ride-type-other"
-                      name="rideTypeother"
-                      type="checkbox"
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      checked={value}
-                      invalid={errors.rideType?.other?.message ? true : false}
-                      data-lpignore="true"
-                    />
-                  </FormGroup>
-                </Col>
-            )}
-          />
-
-          <h5 className='my-3'>Ride difficulty</h5>
-
-          <Controller
-            control={control}
-            name="difficulty.easy"
-            render={({
-              field: { onChange, onBlur, value }
-            }) => (
-              readOnly? 
-                <p>
-                  <span className='pe-3 col-2'>{value === true && 'EASY'}</span>
-                </p>
-              :
-                <Col md={6}>
-                  <FormGroup check inline>
-                    <Label 
-                      className='me-3'
-                      for="difficultyeasy"
-                    >
-                      Easy
-                    </Label>
-                    <Input
-                      id="js-profile-form-ride-type-easy"
-                      name="difficultyEasy"
-                      type="checkbox"
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      checked={value}
-                      invalid={errors.difficulty?.easy?.message ? true : false}
-                      data-lpignore="true"
-                    />
-                  </FormGroup>
-                </Col>
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="difficulty.medium"
-            render={({
-              field: { onChange, onBlur, value }
-            }) => (
-              readOnly? 
-                <p>
-                  <span className='pe-3 col-2'>{value === true && 'MEDIUM'}</span>
-                </p>
-              :
-                <Col md={6}>
-                  <FormGroup check inline>
-                    <Label 
-                      className='me-3'
-                      for="difficultymedium"
-                    >
-                      Medium
-                    </Label>
-                    <Input
-                      id="js-profile-form-ride-type-medium"
-                      name="difficultyMedium"
-                      type="checkbox"
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      checked={value}
-                      invalid={errors.difficulty?.medium?.message ? true : false}
-                      data-lpignore="true"
-                    />
-                  </FormGroup>
-                </Col>
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="difficulty.hard"
-            render={({
-              field: { onChange, onBlur, value }
-            }) => (
-              readOnly? 
-                <p>
-                  <span className='pe-3 col-2'>{value === true && 'HARD'}</span>
-                </p>
-              :
-                <Col md={6}>
-                  <FormGroup check inline>
-                    <Label 
-                      className='me-3'
-                      for="difficultyHard"
-                    >
-                      Hard
-                    </Label>
-                    <Input
-                      id="js-profile-form-ride-type-hard"
-                      name="difficultyhard"
-                      type="checkbox"
-                      onChange={onChange}
-                      onBlur={onBlur}
-                      checked={value}
-                      invalid={errors.difficulty?.hard?.message ? true : false}
-                      data-lpignore="true"
-                    />
-                  </FormGroup>
-                </Col>
+              <fieldset>
+                {rideTypeChoices.map((label, index) => (
+                  readOnly? 
+                    <span className='pe-3 col-2 fw-bold fst-italic'>{value === true && label}</span>
+                  :
+                      <Col md={4}>
+                        <FormGroup check inline>
+                          <Label 
+                            className='me-3'
+                            for={`rideType${index}`}
+                            >
+                            {label}
+                          </Label>
+                          <Input
+                            id={`js-profile-form-ride-type-${index}`}
+                            name={`rideType${index}`}
+                            type="checkbox"
+                            onChange={onChange}
+                            onBlur={onBlur}
+                            checked={value}
+                            invalid={errors.rideType[index]? true : false}
+                            data-lpignore="true"
+                          />
+                        </FormGroup>
+                      </Col>
+                    ))}
+              </fieldset>
             )}
           />
 

@@ -17,16 +17,8 @@ export interface FormFields {
   phonenum: number,
   notify: boolean,
   radius: number,
-  rideType: {
-    road: boolean,
-    mountain: boolean,
-    other: boolean
-  },
-  difficulty: {
-    easy: boolean,
-    medium: boolean, 
-    hard: boolean 
-  }
+  rideType: [],
+  difficulty: []
 }
 
 export interface userFormProps {
@@ -76,16 +68,8 @@ function UserProfile() {
       phonenum: 7022223333,
       notify: true,
       radius: 10,
-      rideType: {
-        road: false, 
-        mountain: false, 
-        other: false
-      },
-      difficulty: {
-        hard: false, 
-        medium: false, 
-        easy: false
-      }
+      rideType: [],
+      difficulty: []
     }
   });
 
@@ -104,9 +88,14 @@ function UserProfile() {
               Edit
             </Button>
           :
-            <Button color='primary' type='submit'>
-              Submit
-            </Button>
+            <div>
+              <Button color='primary' type='submit'>
+                Submit
+              </Button>
+              <Button color='transparent' className='ms-3 border border-secondary' onClick={() => setReadOnly(true)}>
+                Cancel
+              </Button>
+            </div>
           }
           
         </Form>
