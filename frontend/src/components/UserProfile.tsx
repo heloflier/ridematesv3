@@ -1,46 +1,65 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Button, Card, CardBody, CardHeader, CardTitle, Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  CardTitle,
+  Col,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+} from 'reactstrap';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import UserForm from './forms/UserForm';
 
+type RideType = { road: boolean; mountain: boolean; other: boolean };
+type Difficulty = { hard: boolean; medium: boolean; easy: boolean };
+
 export interface FormFields {
   firstName: string;
   lastName: string;
-  address: string,
-  address2: string,
-  city: string,
-  state: string,
-  zipcode: number,
-  email: string,
-  phonenum: number,
-  notify: boolean,
-  radius: number,
-  rideType: [],
-  difficulty: []
+  email: string;
+  phonenum: string;
+  address: string;
+  address2: string;
+  city: string;
+  state: string;
+  zipcode: string;
+  notify: boolean;
+  radius: number;
+  rideType: RideType;
+  difficulty: Difficulty;
 }
 
 export interface userFormProps {
-  readOnly?: boolean
+  readOnly?: boolean;
 }
 
-function UserProfile() { 
-  const [user, setUser] = useState([]);
+function UserProfile() {
+  const [user, setUser] = useState({});
+  const [isValidating, setisValidating] = useState([]);
   const [readOnly, setReadOnly] = useState(true);
+
+  const navigate = useNavigate();
 
   // TODO: the following is just an experiment to test the db. modify when done.
   useEffect(() => {
-    const userId = "64275075798a59db3b803cba";
-    axios
-      .get(`/api/user/${userId}`)
-      .then(res => {
-        setUser(res.data);
-      }
-    );
+    const userId = '64275075798a59db3b803cba';
+    axios.get(`/api/user/${userId}`).then((res) => {
+      console.log('user: ', user);
+      setUser(res.data);
+    });
   }, []);
 
   const onFormSubmit = async (data: any) => {
+    // TODO: don't submit on page load/refresh
+    // e.preventDefault();
     await data;
     console.log('**************** in create user', data);
     // axios
@@ -50,8 +69,9 @@ function UserProfile() {
     //     console.log(res.data);
     //   }
     // );
-  }
-
+    reset(data);
+    navigate('/');
+  };
 
   const useFormReturn = useForm<FormFields>({
     mode: 'all',
@@ -59,52 +79,53 @@ function UserProfile() {
     defaultValues: {
       firstName: 'Bob',
       lastName: 'Bobbinson',
+      email: 'bob@bob.com',
+      phonenum: '7022223333',
       address: '123 Disneyland Lane',
       address2: 'second floor',
       city: 'Redlands',
       state: 'California',
-      zipcode: 10123,
-      email: 'bob@bob.com',
-      phonenum: 7022223333,
-      notify: true,
-      radius: 10,
-      rideType: [],
-      difficulty: []
-    }
+      zipcode: '10123',
+      notify: false,
+      radius: 0,
+      rideType: { road: true, mountain: false, other: false },
+      difficulty: { hard: true, medium: true, easy: false },
+    },
   });
 
   const {
     handleSubmit,
-    formState: { errors },
+    reset,
+    formState: { errors, defaultValues, isValid },
   } = useFormReturn;
-  
+
   return (
     <FormProvider {...useFormReturn}>
       <div className='container'>
         <Form onSubmit={handleSubmit(onFormSubmit)}>
           <UserForm readOnly={readOnly} />
-          {readOnly ?
+          {readOnly ? (
             <Button color='primary' onClick={() => setReadOnly(!readOnly)}>
               Edit
             </Button>
-          :
+          ) : (
             <div>
-              <Button color='primary' type='submit'>
+              <Button color='primary' type='submit' disabled={!isValid}>
                 Submit
               </Button>
-              <Button color='transparent' className='ms-3 border border-secondary' onClick={() => setReadOnly(true)}>
+              <Button
+                color='transparent'
+                className='ms-3 border border-secondary'
+                onClick={() => setReadOnly(true)}
+              >
                 Cancel
               </Button>
             </div>
-          }
-          
+          )}
         </Form>
       </div>
     </FormProvider>
   );
 }
 
-            
-
-  
 export default UserProfile;
