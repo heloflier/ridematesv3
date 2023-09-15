@@ -15,18 +15,28 @@ const userSchema = new Schema({
 	firstName: 	String,
 	lastName: 	String,
 	address: 		String,
+	address2: 	String,
 	city: 			String,
 	state: 			String,
 	zipcode: 		Number,
 	email: 			String,
 	phoneNum: 	Number,
+	notify:			Boolean,
 	radius: 		Number,
 	coordinates: {
 		lat: Number,
 		lng: Number
 	},
-	rideType: 	Number,
-	rideDifficulty: Number,
+	rideType: 	{
+		road: 		Boolean,
+		mountain: Boolean,
+		other: 		Boolean
+	},
+	rideDifficulty: {
+		easy: 		Boolean,
+		medium: 	Boolean,
+		hard: 		Boolean
+	},
 	dateCreated: {
 		type: 		Date,
 		required: false
