@@ -9,14 +9,14 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 import RideForm from '../forms/RideForm';
 
-type RideType = { road: boolean; mountain: boolean; other: boolean };
-type rideDifficulty = { hard: boolean; medium: boolean; easy: boolean };
+// type RideType = { road: boolean; mountain: boolean; other: boolean };
+// type RideDifficulty = { hard: boolean; medium: boolean; easy: boolean };
 
 export interface FormFields {
   rideTitle: string;
   rideDescription: string;
-  rideType: RideType;
-  rideDifficulty: rideDifficulty;
+  rideType: string;
+  rideDifficulty: string;
 }
 
 export interface RideFormProps {
@@ -45,8 +45,6 @@ function RideProfile(props: { location: string; createRide: boolean }) {
     defaultValues: {
       rideTitle: 'Short ride',
       rideDescription: 'This is a somewhat longer description of the ride',
-      rideType: { road: true, mountain: false, other: false },
-      rideDifficulty: { hard: false, medium: true, easy: false },
     },
   });
 
@@ -93,7 +91,7 @@ function RideProfile(props: { location: string; createRide: boolean }) {
             </Button>
           ) : (
             <div>
-              <Button color='primary' type='submit' disabled={!isValid}>
+              <Button color='primary' type='submit'>
                 Submit
               </Button>
               <Button

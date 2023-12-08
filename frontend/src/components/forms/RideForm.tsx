@@ -128,11 +128,14 @@ export default function RideForm({ readOnly }: RideFormProps) {
           <Controller
             control={control}
             name='rideType'
-            rules={{ required: 'ride type is required' }}
+            rules={{
+              required: 'ride type is required',
+              validate: (value) =>
+                value === 'Road' || value === 'Mountain' || value === 'Other',
+            }}
             render={({ field: { onChange, onBlur, value } }) =>
               readOnly ? (
                 <>
-                  {console.log('--------- ride type value: ', typeof value)}
                   {value && (
                     <span className='pe-3 col-2 fw-bold fst-italic'>
                       {value}
@@ -142,7 +145,7 @@ export default function RideForm({ readOnly }: RideFormProps) {
               ) : (
                 <Col md={4}>
                   <FormGroup check inline>
-                    <Label check className='me-3' for='rideType'>
+                    <Label check className='me-3' for='rideTypeRoad'>
                       Road
                     </Label>
                     <Input
@@ -151,27 +154,22 @@ export default function RideForm({ readOnly }: RideFormProps) {
                       type='radio'
                       onChange={onChange}
                       onBlur={onBlur}
-                      checked={value.road}
-                      invalid={errors.rideType?.road?.message ? true : false}
+                      checked={value === 'Road'}
                       value='Road'
                       data-lpignore='true'
                     />
-                    {() => console.log('-------value: ', value)}
                   </FormGroup>
                   <FormGroup check inline>
-                    <Label className='me-3' for='rideType'>
+                    <Label check className='me-3' for='rideType'>
                       Mountain
                     </Label>
                     <Input
-                      id='js-profile-form-ride-type-mountain'
+                      id='js-profile-form-ride-type-road'
                       name='rideType'
                       type='radio'
                       onChange={onChange}
                       onBlur={onBlur}
-                      checked={value.mountain}
-                      invalid={
-                        errors.rideType?.mountain?.message ? true : false
-                      }
+                      checked={value === 'Mountain'}
                       value='Mountain'
                       data-lpignore='true'
                     />
@@ -186,12 +184,14 @@ export default function RideForm({ readOnly }: RideFormProps) {
                       type='radio'
                       onChange={onChange}
                       onBlur={onBlur}
-                      checked={value.other}
-                      invalid={errors.rideType?.other?.message ? true : false}
+                      checked={value === 'Other'}
                       value='Other'
                       data-lpignore='true'
                     />
                   </FormGroup>
+                  {errors.rideType?.message && (
+                    <div className='text-danger'>{errors.rideType.message}</div>
+                  )}
                 </Col>
               )
             }
@@ -202,14 +202,16 @@ export default function RideForm({ readOnly }: RideFormProps) {
           <Controller
             control={control}
             name='rideDifficulty'
-            rules={{ required: 'ride difficulty is required' }}
+            rules={{
+              required: 'ride difficulty is required',
+              validate: (value) =>
+                value === 'Easy' || value === 'Medium' || value === 'Hard',
+            }}
             render={({ field: { onChange, onBlur, value } }) =>
               readOnly ? (
                 <>
-                  {console.log('--------- ride difficulty value: ', value)}
                   {value && (
                     <span className='pe-3 col-2 fw-bold fst-italic'>
-                      {/* {(value: object) => extractvalue} */}
                       {value}
                     </span>
                   )}
@@ -226,11 +228,7 @@ export default function RideForm({ readOnly }: RideFormProps) {
                       type='radio'
                       onChange={onChange}
                       onBlur={onBlur}
-                      // TODO: fix this below. This is the last change made.
-                      checked={value.easy}
-                      invalid={
-                        errors.rideDifficulty?.easy?.message ? true : false
-                      }
+                      checked={value === 'Easy'}
                       value='Easy'
                       data-lpignore='true'
                     />
@@ -245,10 +243,7 @@ export default function RideForm({ readOnly }: RideFormProps) {
                       type='radio'
                       onChange={onChange}
                       onBlur={onBlur}
-                      checked={value.medium}
-                      invalid={
-                        errors.rideDifficulty?.medium?.message ? true : false
-                      }
+                      checked={value === 'Medium'}
                       value='Medium'
                       data-lpignore='true'
                     />
@@ -263,14 +258,17 @@ export default function RideForm({ readOnly }: RideFormProps) {
                       type='radio'
                       onChange={onChange}
                       onBlur={onBlur}
-                      checked={value.hard}
-                      invalid={
-                        errors.rideDifficulty?.hard?.message ? true : false
-                      }
+                      checked={value === 'Hard'}
                       value='Hard'
                       data-lpignore='true'
                     />
                   </FormGroup>
+
+                  {errors.rideDifficulty?.message && (
+                    <div className='text-danger'>
+                      {errors.rideDifficulty.message}
+                    </div>
+                  )}
                 </Col>
               )
             }
