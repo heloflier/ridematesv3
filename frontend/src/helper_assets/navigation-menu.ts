@@ -8,7 +8,7 @@ const navigationMenuItems = [
         navItemPath: menuPaths.PROFILE,
         navItemTitle: "my profile"
     // }, {
-    //     navItemPath: menuPaths.CREATE_RIDE,
+    //     navItemPath: menuPaths.RIDE,
     //     navItemTitle: "create ride"
     }, {
         navItemPath: menuPaths.USER_RIDES,

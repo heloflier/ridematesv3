@@ -1,20 +1,18 @@
 
 import { Router, Request, Response} from 'express';
+import Ride from '../models/Ride';
 
 const router = Router();
 
+//=================================================
+// 	Requests for a Ride
+//=================================================
+
 router.get('/:id', async (req: Request, res: Response) => {
-	console.log('-----------  GET profile');
-	res.json('response from GET server');
-	// const requests = await Email.find({ _user: req.user.id })
-	// 	// .select({
-	// 		// recipients: false
-	// 	// })
-	// 	.then(function(results) {
-	// 		console.log('in /api/request GET route');
-	// 		console.log('results: ', results);
-	// 		res.json(results);
-	// 	});
+	console.log('-----------  GET ride', req.params.id);
+	const ride = await Ride.findById(req.params.id);
+	res.json(ride);
+	console.log('ride: ', ride);
 });
 
 router.post("/create", async (req: Request, res: Response) => {

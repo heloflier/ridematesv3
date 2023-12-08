@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormContext, Controller, useFieldArray } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 import {
   Card,
   CardBody,
@@ -12,17 +12,13 @@ import {
   Label,
   Row,
 } from 'reactstrap';
-import { FormFields, userFormProps } from '../UserProfile';
+import { FormFields, userFormProps } from '../userProfile/UserProfile';
 
 export default function UserForm({ readOnly }: userFormProps) {
   const {
     control,
     formState: { errors, isValid },
   } = useFormContext<FormFields>();
-  // const { fields, append, remove } = useFieldArray({
-  //   control,
-  //   name: 'rideType',
-  // });
 
   return (
     <Card className='mb-3'>
@@ -443,7 +439,7 @@ export default function UserForm({ readOnly }: userFormProps) {
                 <Col md={6}>
                   <FormGroup>
                     <Label className='me-3' for='radius'>
-                      Radius in miles from your home
+                      Radius in miles from your home (numbers only)
                     </Label>
                     <Input
                       id='js-profile-form-radius'

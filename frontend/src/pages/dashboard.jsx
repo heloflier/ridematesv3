@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import axios from "axios";
-import { Button, NavLink } from 'reactstrap';
+import { Button } from 'reactstrap';
 
-import RidesList from '../components/RidesList';
+import RidesList from '../components/dashboard/RidesList';
 import { StoreContext } from '../stores/store-context';
-import { DASHBOARD, CREATE_RIDE } from '../helper_assets/menu-paths';
+import { DASHBOARD, RIDE } from '../helper_assets/menu-paths';
 
 const DashboardPage = () => {
 
@@ -31,16 +32,16 @@ const DashboardPage = () => {
   return (
     <div>
       <div className='d-flex justify-content-end'>
-        <NavLink href={`/${CREATE_RIDE}`}>
+        <Link to={`/${RIDE}`} state={{ createRide: true }}>
           <Button
             size='lg'
             color=''
             className='std-theme'
-            onClick={()=> console.log('clicked enter new ride')}
+            // onClick={()=> console.log('clicked enter new ride')}
             >
             Create a new ride!
           </Button>
-        </NavLink>
+        </Link>
       </div>
       <RidesList ridesList={ridesList} />
     </div>
