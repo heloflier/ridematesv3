@@ -674,64 +674,6 @@ export default function UserForm({ readOnly }: userFormProps) {
               }
             />
           </Row>
-
-          {/* {fields.map((rideType) => (
-            <Controller
-              control={control}
-              name='rideType'
-              rules={{
-                required: 'ride type is required',
-              }}
-              render={({ field: { onChange, onBlur, value } }) =>
-                readOnly ? (
-                  <p>
-                    <span className='pe-3 col-2 fw-bold fst-italic'>
-                      {rideType.type}
-                    </span>
-                  </p>
-                ) : (
-                  <p></p>
-                )
-              }
-            />
-          ))} 
-          
-          <Controller
-            control={control}
-            name='rideType'
-            rules={{
-              required: 'ride type is required',
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <fieldset>
-                {rideTypeChoices.map(({ type, checked }, index) =>
-                  readOnly ? (
-                    <span className='pe-3 col-2 fw-bold fst-italic'>
-                      {checked && type}
-                    </span>
-                  ) : (
-                    <Col md={4}>
-                      <FormGroup check inline>
-                        <Label className='me-3' for={`rideType${index}`}>
-                          {type}
-                        </Label>
-                        <Input
-                          id={`js-profile-form-ride-type-${index}`}
-                          name={`rideType${index}`}
-                          type='checkbox'
-                          onChange={onChange}
-                          onBlur={onBlur}
-                          checked={checked}
-                          // invalid={errors.rideType[index]? true : false}
-                          data-lpignore='true'
-                        />
-                      </FormGroup>
-                    </Col>
-                  )
-                )}
-              </fieldset>
-            )}
-          /> */}
         </Row>
       </CardBody>
     </Card>

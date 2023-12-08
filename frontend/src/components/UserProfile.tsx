@@ -19,7 +19,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import UserForm from './forms/UserForm';
 
 type RideType = { road: boolean; mountain: boolean; other: boolean };
-type Difficulty = { hard: boolean; medium: boolean; easy: boolean };
+type RideDifficulty = { hard: boolean; medium: boolean; easy: boolean };
 
 export interface FormFields {
   firstName: string;
@@ -34,7 +34,7 @@ export interface FormFields {
   notify: boolean;
   radius: number;
   rideType: RideType;
-  difficulty: Difficulty;
+  difficulty: RideDifficulty;
 }
 
 export interface userFormProps {
