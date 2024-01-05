@@ -16,17 +16,17 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post("/create", async (req: Request, res: Response) => {
-	console.log('----------- POST profile');
+	console.log('----------- POST ride');
 	res.json('response from POST server');
 });
 
 router.put("/edit/:id", async (req: Request, res: Response) => {
-	console.log('-----------  PUT profile');
+	console.log('-----------  PUT ride');
 	res.json('response from PUT server');
 });
 
 router.delete("/delete/:id", async (req: Request, res: Response) => {
-	console.log('-----------  DELETE profile');
+	console.log('-----------  DELETE ride');
 	res.json('response from DELETE server');
 });
 

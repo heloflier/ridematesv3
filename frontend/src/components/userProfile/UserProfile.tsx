@@ -5,7 +5,6 @@ import { Button, Form } from 'reactstrap';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import UserForm from '../forms/UserForm';
-import { on } from 'events';
 
 type RideType = { road: boolean; mountain: boolean; other: boolean };
 type Difficulty = { hard: boolean; medium: boolean; easy: boolean };
@@ -53,8 +52,8 @@ function UserProfile() {
       notify: false,
       radius: 0,
       rideType: { road: true, mountain: false, other: false },
-      difficulty: { hard: true, medium: true, easy: false },
-    },
+      difficulty: { hard: true, medium: true, easy: false }
+    }
   });
 
   // TODO: the following is just an experiment to test the db. modify when done.
@@ -69,7 +68,7 @@ function UserProfile() {
   const {
     handleSubmit,
     reset,
-    formState: { errors, defaultValues, isValid },
+    formState: { errors, defaultValues, isValid }
   } = useFormReturn;
 
   const onFormSubmit = async (data: any) => {

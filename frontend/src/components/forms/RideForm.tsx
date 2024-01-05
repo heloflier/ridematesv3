@@ -10,21 +10,14 @@ import {
   FormFeedback,
   Input,
   Label,
-  Row,
+  Row
 } from 'reactstrap';
 import { FormFields, RideFormProps } from '../ride/RideProfile';
-
-// const extractvalue = (object: { key: string; value: string }) => {
-//   for (const key in object) {
-//     console.log(`${key}: ${object[key]}`);
-//     if (object[key] === true) return key;
-//   }
-// };
 
 export default function RideForm({ readOnly }: RideFormProps) {
   const {
     control,
-    formState: { errors, isValid },
+    formState: { errors, isValid }
   } = useFormContext<FormFields>();
 
   return (
@@ -44,12 +37,12 @@ export default function RideForm({ readOnly }: RideFormProps) {
               required: 'ride title is required',
               maxLength: {
                 value: 45,
-                message: 'ride title must be less than 45 characters',
+                message: 'ride title must be less than 45 characters'
               },
               pattern: {
                 value: /^[A-Za-z0-9\s]+$/i,
-                message: 'ride title must contain only letters and numbers',
-              },
+                message: 'ride title must contain only letters and numbers'
+              }
             }}
             render={({ field: { onChange, onBlur, value } }) =>
               readOnly ? (
@@ -84,13 +77,13 @@ export default function RideForm({ readOnly }: RideFormProps) {
               required: 'ride description is required',
               minLength: {
                 value: 10,
-                message: 'ride description must be at least 10 characters',
+                message: 'ride description must be at least 10 characters'
               },
               pattern: {
                 value: /^[A-Za-z0-9\s]+$/i,
                 message:
-                  'ride description must contain only letters and numbers',
-              },
+                  'ride description must contain only letters and numbers'
+              }
             }}
             render={({ field: { onChange, onBlur, value } }) =>
               readOnly ? (
@@ -131,7 +124,7 @@ export default function RideForm({ readOnly }: RideFormProps) {
             rules={{
               required: 'ride type is required',
               validate: (value) =>
-                value === 'Road' || value === 'Mountain' || value === 'Other',
+                value === 'Road' || value === 'Mountain' || value === 'Other'
             }}
             render={({ field: { onChange, onBlur, value } }) =>
               readOnly ? (
@@ -205,7 +198,7 @@ export default function RideForm({ readOnly }: RideFormProps) {
             rules={{
               required: 'ride difficulty is required',
               validate: (value) =>
-                value === 'Easy' || value === 'Medium' || value === 'Hard',
+                value === 'Easy' || value === 'Medium' || value === 'Hard'
             }}
             render={({ field: { onChange, onBlur, value } }) =>
               readOnly ? (

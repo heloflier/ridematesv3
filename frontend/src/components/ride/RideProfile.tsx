@@ -2,7 +2,9 @@
 // Make sure to look into the context and see if it is needed.
 
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+// import uselocation when needed
+// import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Form } from 'reactstrap';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -25,7 +27,6 @@ export interface RideFormProps {
 
 function RideProfile(props: { location: string; createRide: boolean }) {
   const [ride, setRide] = useState({});
-  const [isValidating, setisValidating] = useState([]);
   const [readOnly, setReadOnly] = useState(!props.createRide);
 
   const navigate = useNavigate();
@@ -41,18 +42,13 @@ function RideProfile(props: { location: string; createRide: boolean }) {
 
   const useFormReturn = useForm<FormFields>({
     mode: 'all',
-    reValidateMode: 'onChange',
-    defaultValues: {
-      rideTitle: 'Short ride',
-      rideDescription: 'This is a somewhat longer description of the ride',
-    },
+    reValidateMode: 'onChange'
   });
 
   const onFormSubmit = (data: any) => {
     // TODO: don't submit on page load/refresh
     // e.preventDefault();
     // await data;
-    console.log('**************** data: ', data);
     // console.log('**************** in create ride', data);
     // axios
     //   .post('/api/ride/create')
@@ -71,7 +67,7 @@ function RideProfile(props: { location: string; createRide: boolean }) {
   const {
     handleSubmit,
     reset,
-    formState: { errors, defaultValues, isValid },
+    formState: { errors, defaultValues, isValid }
   } = useFormReturn;
 
   const onCancel = () => {
