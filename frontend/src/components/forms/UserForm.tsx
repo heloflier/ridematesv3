@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFormContext, Controller, useFieldArray } from 'react-hook-form';
+import { useFormContext, Controller } from 'react-hook-form';
 import {
   Card,
   CardBody,
@@ -12,17 +12,13 @@ import {
   Label,
   Row,
 } from 'reactstrap';
-import { FormFields, userFormProps } from '../UserProfile';
+import { FormFields, userFormProps } from '../userProfile/UserProfile';
 
 export default function UserForm({ readOnly }: userFormProps) {
   const {
     control,
     formState: { errors, isValid },
   } = useFormContext<FormFields>();
-  // const { fields, append, remove } = useFieldArray({
-  //   control,
-  //   name: 'rideType',
-  // });
 
   return (
     <Card className='mb-3'>
@@ -443,7 +439,7 @@ export default function UserForm({ readOnly }: userFormProps) {
                 <Col md={6}>
                   <FormGroup>
                     <Label className='me-3' for='radius'>
-                      Radius in miles from your home
+                      Radius in miles from your home (numbers only)
                     </Label>
                     <Input
                       id='js-profile-form-radius'
@@ -674,64 +670,6 @@ export default function UserForm({ readOnly }: userFormProps) {
               }
             />
           </Row>
-
-          {/* {fields.map((rideType) => (
-            <Controller
-              control={control}
-              name='rideType'
-              rules={{
-                required: 'ride type is required',
-              }}
-              render={({ field: { onChange, onBlur, value } }) =>
-                readOnly ? (
-                  <p>
-                    <span className='pe-3 col-2 fw-bold fst-italic'>
-                      {rideType.type}
-                    </span>
-                  </p>
-                ) : (
-                  <p></p>
-                )
-              }
-            />
-          ))} 
-          
-          <Controller
-            control={control}
-            name='rideType'
-            rules={{
-              required: 'ride type is required',
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <fieldset>
-                {rideTypeChoices.map(({ type, checked }, index) =>
-                  readOnly ? (
-                    <span className='pe-3 col-2 fw-bold fst-italic'>
-                      {checked && type}
-                    </span>
-                  ) : (
-                    <Col md={4}>
-                      <FormGroup check inline>
-                        <Label className='me-3' for={`rideType${index}`}>
-                          {type}
-                        </Label>
-                        <Input
-                          id={`js-profile-form-ride-type-${index}`}
-                          name={`rideType${index}`}
-                          type='checkbox'
-                          onChange={onChange}
-                          onBlur={onBlur}
-                          checked={checked}
-                          // invalid={errors.rideType[index]? true : false}
-                          data-lpignore='true'
-                        />
-                      </FormGroup>
-                    </Col>
-                  )
-                )}
-              </fieldset>
-            )}
-          /> */}
         </Row>
       </CardBody>
     </Card>

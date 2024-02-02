@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Col } from 'reactstrap';
 
-function Ride(props) { 
+function RidesListItem(props) { 
 
   const { avatar, uid, username } = props.rideInfo;
 
@@ -44,4 +44,4 @@ function Ride(props) {
 //     classes: PropTypes.object.isRequired,
 //   };
   
-  export default Ride;
+  export default RidesListItem;

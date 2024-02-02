@@ -4,7 +4,7 @@ import User from '../models/User';
 const router = Router();
 
 //=================================================
-// 	displaying all the requests for a user
+// 	Requests for a User
 //=================================================
 
 router.get('/:id', async (req: Request, res: Response) => {

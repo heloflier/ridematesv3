@@ -1,22 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  CardTitle,
-  Col,
-  Form,
-  FormGroup,
-  Input,
-  Label,
-  Row,
-} from 'reactstrap';
+import { Button, Form } from 'reactstrap';
 import { FormProvider, useForm } from 'react-hook-form';
 
-import UserForm from './forms/UserForm';
+import UserForm from '../forms/UserForm';
 
 type RideType = { road: boolean; mountain: boolean; other: boolean };
 type Difficulty = { hard: boolean; medium: boolean; easy: boolean };
@@ -48,31 +36,6 @@ function UserProfile() {
 
   const navigate = useNavigate();
 
-  // TODO: the following is just an experiment to test the db. modify when done.
-  useEffect(() => {
-    const userId = '64275075798a59db3b803cba';
-    axios.get(`/api/user/${userId}`).then((res) => {
-      console.log('user: ', user);
-      setUser(res.data);
-    });
-  }, []);
-
-  const onFormSubmit = async (data: any) => {
-    // TODO: don't submit on page load/refresh
-    // e.preventDefault();
-    await data;
-    console.log('**************** in create user', data);
-    // axios
-    //   .post('/api/user/create')
-    //   .then(res => {
-    //     setUser(res.data);
-    //     console.log(res.data);
-    //   }
-    // );
-    reset(data);
-    navigate('/');
-  };
-
   const useFormReturn = useForm<FormFields>({
     mode: 'all',
     reValidateMode: 'onChange',
@@ -89,15 +52,47 @@ function UserProfile() {
       notify: false,
       radius: 0,
       rideType: { road: true, mountain: false, other: false },
-      difficulty: { hard: true, medium: true, easy: false },
-    },
+      difficulty: { hard: true, medium: true, easy: false }
+    }
   });
+
+  // TODO: the following is just an experiment to test the db. modify when done.
+  useEffect(() => {
+    const userId = '64275075798a59db3b803cba';
+    axios.get(`/api/user/${userId}`).then((res) => {
+      console.log('user: ', res.data);
+      setUser(res.data);
+    });
+  }, []);
 
   const {
     handleSubmit,
     reset,
-    formState: { errors, defaultValues, isValid },
+    formState: { errors, defaultValues, isValid }
   } = useFormReturn;
+
+  const onFormSubmit = async (data: any) => {
+    // TODO: don't submit on page load/refresh
+    // e.preventDefault();
+    await data;
+    console.log('**************** in create user', data);
+    // axios
+    //   .post('/api/user/create')
+    //   .then(res => {
+    //     setUser(res.data);
+    //     console.log(res.data);
+    //   }
+    // );
+    reset(data);
+    setReadOnly(true);
+    // navigate('/');
+  };
+
+  const onCancel = () => {
+    reset(defaultValues);
+    setReadOnly(true);
+    navigate('/');
+  };
 
   return (
     <FormProvider {...useFormReturn}>
@@ -116,7 +111,7 @@ function UserProfile() {
               <Button
                 color='transparent'
                 className='ms-3 border border-secondary'
-                onClick={() => setReadOnly(true)}
+                onClick={onCancel}
               >
                 Cancel
               </Button>
