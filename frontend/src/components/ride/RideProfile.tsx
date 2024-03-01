@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 // import uselocation when needed
 // import { useLocation, useNavigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Button, Form } from 'reactstrap';
 import { FormProvider, useForm } from 'react-hook-form';
 
@@ -15,6 +14,7 @@ import RideForm from '../forms/RideForm';
 // type RideDifficulty = { hard: boolean; medium: boolean; easy: boolean };
 
 export interface FormFields {
+  id?: string;
   rideTitle: string;
   rideDescription: string;
   rideType: string;
@@ -26,7 +26,7 @@ export interface RideFormProps {
 }
 
 function RideProfile(props: { location: string; createRide: boolean }) {
-  const [ride, setRide] = useState({});
+  const [rideData, setRideData] = useState({});
   const [readOnly, setReadOnly] = useState(!props.createRide);
 
   const navigate = useNavigate();
@@ -34,10 +34,14 @@ function RideProfile(props: { location: string; createRide: boolean }) {
   // TODO: the following is just an experiment to test the db. modify when done.
   useEffect(() => {
     const rideId = '6504c7fc0afe1183e4538209';
-    axios.get(`/api/rides/${rideId}`).then((res) => {
-      console.log('ride: ', res.data);
-      setRide(res.data);
-    });
+    const apiUrl = `/api/ride/${rideId}`;
+
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((ride) => setRideData(ride))
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }, []);
 
   const useFormReturn = useForm<FormFields>({
@@ -46,22 +50,36 @@ function RideProfile(props: { location: string; createRide: boolean }) {
   });
 
   const onFormSubmit = (data: any) => {
+    // TODO: add the userId as createdById to the data when it is available
+    data.createdById = '64275075798a59db3b803cba';
     // TODO: don't submit on page load/refresh
     // e.preventDefault();
-    // await data;
-    // console.log('**************** in create ride', data);
-    // axios
-    //   .post('/api/ride/create')
-    //   .then(res => {
-    //     setRide(res.data);
-    //     console.log(res.data);
-    //   }
-    // );
-    reset(data);
+
+    const apiUrl = `/api/ride/create`;
+
+    fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((newUserData) => {
+        // Process the newly created user data
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+    // reset(data);
     setReadOnly(true);
-    // navigate('/');
-    // TODO: validate radio buttons on submit: at least one per type
-    // needs to be checked.
+    navigate('/');
   };
 
   const {

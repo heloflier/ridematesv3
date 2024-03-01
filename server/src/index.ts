@@ -84,7 +84,7 @@ import ridesRoutes from "./controllers/ridesController";
 
 
 app.use("/api/user", profileRoutes);
-app.use("/api/rides", ridesRoutes);
+app.use("/api/ride", ridesRoutes);
 // app.use("/api/request", requestRoutes);
 // app.use("/api/results", resultsRoutes);
 

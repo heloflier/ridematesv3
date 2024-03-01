@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   DASHBOARD,
   PROFILE,
-  RIDE,
+  CREATE_RIDE,
+  EDIT_RIDE,
   USER_RIDES
 } from './helper_assets/menu-paths';
 
@@ -24,7 +25,8 @@ class App extends Component {
         <Routes>
           <Route path={DASHBOARD} element={<DashboardPage />} />
           <Route path={`/${PROFILE}`} element={<ProfilePage />} />
-          <Route path={`/${RIDE}`} element={<RidePage />} />
+          <Route path={`/${CREATE_RIDE}`} element={<RidePage createRide />} />
+          <Route path={`/${EDIT_RIDE}`} element={<RidePage />} />
           <Route path={`/${USER_RIDES}`} element={<UserRidesPage />} />
         </Routes>
       </Router>
