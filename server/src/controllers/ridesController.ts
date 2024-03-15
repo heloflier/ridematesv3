@@ -8,11 +8,13 @@ const router = Router();
 // 	Requests for a Ride
 //=================================================
 
+console.log('-----------  in rides controller');
+
 router.get('/all', async (req: Request, res: Response) => {
 	console.log('-----------  GET ALL rides', req.body);
 	const allRides = await Ride.find();
 	res.json(allRides);
-	console.log('************* rides: ', allRides);
+	// console.log('************* rides: ', allRides);
 });
 
 router.get('/allByUser/:id', async (req: Request, res: Response) => {
@@ -20,6 +22,13 @@ router.get('/allByUser/:id', async (req: Request, res: Response) => {
 	const allRides = await Ride.find({ 'createdById': req.params.id }).exec();
 	res.json(allRides);
 	console.log('************* rides: ', allRides);
+});
+
+router.put('/:id/join', async (req: Request, res: Response) => {
+	console.log('-----------  PUT ride', req.params.id);
+	const ride = await Ride.findByIdAndUpdate(req.params.id, req.body);
+	res.json(ride);
+	console.log('************* ride: ', ride);
 });
 
 router.get('/:id', async (req: Request, res: Response) => {
