@@ -108,15 +108,15 @@ function UserProfile() {
               <Button color='primary' type='submit' disabled={!isValid}>
                 Submit
               </Button>
-              <Button
-                color='transparent'
-                className='ms-3 border border-secondary'
-                onClick={onCancel}
-              >
-                Cancel
-              </Button>
             </div>
           )}
+          <Button
+            color='transparent'
+            className='ms-3 border border-secondary'
+            onClick={onCancel}
+          >
+            Cancel
+          </Button>
         </Form>
       </div>
     </FormProvider>

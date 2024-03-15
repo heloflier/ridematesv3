@@ -5,13 +5,12 @@ import RidesListItem from './RidesListItem';
 
 const RidesList = ({ridesList = []}) => { 
   
-  const rides = ridesList.map( rideInfo => (
-        <RidesListItem rideInfo={rideInfo}  key={rideInfo.id} />
+  const rides = ridesList.map(( rideInfo, index) => (
+    <RidesListItem rideInfo={rideInfo}  key={index} />
   ));
 
   return (
     <Fragment>
-      <h2>Available rides</h2>
       <CardGroup>
         { rides };
       </CardGroup>

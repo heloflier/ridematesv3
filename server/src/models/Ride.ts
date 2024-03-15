@@ -9,8 +9,10 @@ const { Schema, model } = mongoose;
 // const passportLocalMongoose = require('passport-local-mongoose');
 
 const rideSchema = new Schema({
-	rideName: 	        String,
-	imageUrl: 	        String, 
+	rideTitle: 	        String,
+	imageUrl: 	        String,
+  createdById: 	      String,
+  createdByName: 	    String,
   map:                Object,
 	startingAddress: {
     city: 			String,
@@ -23,8 +25,9 @@ const rideSchema = new Schema({
       lng: Number
     }
   },
-	rideType: 	    Number,
-	rideDifficulty: Number,
+	rideType: 	      String,
+	rideDescription: 	String,
+	rideDifficulty:   String,
 	dateCreated: {
 		type: 		Date,
 		required: false

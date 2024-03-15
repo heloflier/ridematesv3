@@ -3,7 +3,7 @@ import { Button, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Col
 
 function RidesListItem(props) { 
 
-  const { avatar, uid, username } = props.rideInfo;
+  const { rideDescription, rideDifficulty, rideTitle, rideType, id } = props.rideInfo;
 
   return (
     <div className='container-fluid'>
@@ -11,7 +11,7 @@ function RidesListItem(props) {
         <Col xs="2">
           <CardImg
             alt="Card image"
-            src={ avatar }
+            // src={ avatar }
             top
             className='w-20 m-4'
             />
@@ -19,16 +19,22 @@ function RidesListItem(props) {
         <Col>
           <CardBody>
             <CardTitle tag="h5">
-              { username }
+              { rideTitle }
             </CardTitle>
             <CardSubtitle
               className="mb-2 text-muted"
               tag="h6"
             >
-              { uid }
+              { id }
             </CardSubtitle>
             <CardText>
-              This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+              { rideType }
+            </CardText>
+            <CardText>
+              { rideDifficulty }
+            </CardText>
+            <CardText>
+              { rideDescription }
             </CardText>
             <Button>
               Button
