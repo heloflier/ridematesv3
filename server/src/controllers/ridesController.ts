@@ -24,7 +24,7 @@ router.get('/allByUser/:id', async (req: Request, res: Response) => {
 	console.log('************* rides: ', allRides);
 });
 
-router.put('/:id/join', async (req: Request, res: Response) => {
+router.put('/:id/joinorleave', async (req: Request, res: Response) => {
 	console.log('-----------  PUT ride', req.params.id);
 	const ride = await Ride.findByIdAndUpdate(req.params.id, req.body);
 	res.json(ride);

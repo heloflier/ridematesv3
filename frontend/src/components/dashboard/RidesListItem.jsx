@@ -23,7 +23,7 @@ function RidesListItem(props) {
   }
 
 	function modifyRide(id, newRideInfo) {
-		const apiUrl = `/api/ride/${id}/join`;
+		const apiUrl = `/api/ride/${id}/joinorleave`;
 		const requestOptions = {
 			method: 'PUT',
 			headers: { 
