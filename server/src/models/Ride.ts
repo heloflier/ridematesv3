@@ -31,7 +31,8 @@ const rideSchema = new Schema({
 	dateCreated: {
 		type: 		Date,
 		required: false
-	}
+	},
+  participants: []
 });
 
 // UserSchema.plugin(passportLocalMongoose);
