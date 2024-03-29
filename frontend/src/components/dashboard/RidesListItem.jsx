@@ -3,22 +3,23 @@ import { Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, Col } from 
 
 function RidesListItem(props) { 
 
-	const userId = '64275075798a59db3b803cba';
+	const currentUserId = '64275075798a59db3b803cba';
+	// const currentUserId = '000000000000000000000000';
 
-	const { rideDescription, rideDifficulty, rideTitle, rideType, _id, participants } = props.rideInfo;
-	const [joined, setJoined] = useState(participants.some(participant => participant.userId === userId));
+	const { rideDescription, rideDifficulty, rideTitle, rideType, _id, createdById, participants } = props.rideInfo;
+	const [joined, setJoined] = useState(participants.some(participant => participant.userId === currentUserId));
 
-	// TODO: add the userId to the data when it is available
-
+	// TODO: replace the data userId with the currentUserId in when authentication is enabled
+ 
 	function joinRide(id) {
 		const newRideInfo = props.rideInfo
-		newRideInfo.participants.push({ userId });
+		newRideInfo.participants.push({ currentUserId });
 		modifyRide(id, newRideInfo)
 	}
-
+ 
   function leaveRide(id) {
     const newRideInfo = props.rideInfo
-    newRideInfo.participants = newRideInfo.participants.filter(participant => participant.userId!== userId);
+    newRideInfo.participants = newRideInfo.participants.filter(participant => participant.userId!== currentUserId);
     modifyRide(id, newRideInfo);
   }
 
@@ -78,22 +79,23 @@ function RidesListItem(props) {
 						</CardText><CardText>
 							{ <span>Participants: {participants?.length}</span> }
 						</CardText>
-						<a href={`/api/ride/${_id}`}>
+						{/* TODO: add single ride page when appropriate */}
+						<a href={`/ride/${_id}`}>
 							<button 
-								className='btn btn-primary' 
+								className='btn btn-primary'
 							>
 								View Ride
 							</button>
 						</a>
-						{joined
-							? 
+						{(currentUserId !== createdById) && joined &&
 							(<button 
 								className='btn btn-danger ms-3 px-3' 
 								onClick={() => leaveRide(_id)}
 							>
 								Leave ride
 							</button>)
-							:
+						}
+						{(currentUserId !== createdById) && !joined &&
 							(<button 
 								className='btn btn-success ms-3 px-3' 
 								onClick={() => joinRide(_id)}
