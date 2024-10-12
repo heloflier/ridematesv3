@@ -5,17 +5,19 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import {
   DASHBOARD,
-  PROFILE,
   CREATE_RIDE,
   EDIT_RIDE,
+  LOGIN,
+  PROFILE,
   USER_RIDES
 } from './helper_assets/menu-paths';
 
-import Navigation from './components/Nav/Navigation';
-import ProfilePage from './pages/profile';
-import RidePage from './pages/ride';
-import DashboardPage from './pages/dashboard';
-import UserRidesPage from './pages/userRides';
+import { Navigation } from './components/Nav/Navigation';
+import { UserProfilePage } from './pages/UserProfilePage';
+import { RidePage } from './pages/RidePage';
+import { LoginPage } from './pages/LoginPage';
+import { DashboardPage } from './pages/DashboardPage';
+import { UserRidesPage } from './pages/UserRidesPage';
 
 class App extends Component {
   render() {
@@ -24,10 +26,12 @@ class App extends Component {
         <Navigation />
         <Routes>
           <Route path={DASHBOARD} element={<DashboardPage />} />
-          <Route path={`/${PROFILE}`} element={<ProfilePage />} />
+          <Route path={`/${LOGIN}`} element={<LoginPage />} />
+          <Route path={`/${PROFILE}`} element={<UserProfilePage />} />
+          <Route path={`/${USER_RIDES}`} element={<UserRidesPage />} />
+          <Route path='*' element={<h1>There's nothing here: 404!</h1>} />
           <Route path={`/${CREATE_RIDE}`} element={<RidePage createRide />} />
           <Route path={`/${EDIT_RIDE}`} element={<RidePage />} />
-          <Route path={`/${USER_RIDES}`} element={<UserRidesPage />} />
         </Routes>
       </Router>
     );

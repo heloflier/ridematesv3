@@ -5,10 +5,10 @@ import RideProfile from '../components/ride/RideProfile';
 import { CREATE_RIDE, DASHBOARD, EDIT_RIDE } from '../helper_assets/menu-paths';
 import { StoreContext } from '../stores/store-context';
 
-function RidePage(props) {
+export const RidePage = (props) => {
 
   const store = useContext(StoreContext);
-  const location = useLocation()
+  const location = useLocation();
 
   let createRide = false;
   if (location.pathname === "/create-ride") {
@@ -28,5 +28,3 @@ function RidePage(props) {
     </div>
   );
 }
-
-export default RidePage;

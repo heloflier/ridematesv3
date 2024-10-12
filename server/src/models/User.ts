@@ -10,7 +10,6 @@ const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
 	id: 				String,
-	userName: 	String,
 	password: {
 		type: String,
 		required: true

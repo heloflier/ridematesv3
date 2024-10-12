@@ -4,7 +4,15 @@ import { CardGroup } from 'reactstrap';
 import RidesListItem from './RidesListItem';
 
 const RidesList = ({ridesList = []}) => { 
+  if (ridesList.length === 0) {
+    return (
+      <div>
+        <h3>No rides available</h3>
+      </div>
+    );
+  }
   
+  console.log('ridesList: ', ridesList);
   const rides = ridesList.map(( rideInfo, index) => (
     <RidesListItem rideInfo={rideInfo}  key={index} />
   ));

@@ -1,8 +1,10 @@
 
 import { Router, Request, Response} from 'express';
+import { verifyJWT } from '../auth/verifyJWT';
 import Ride from '../models/Ride';
 
 const router = Router();
+
 
 //=================================================
 // 	Requests for a Ride

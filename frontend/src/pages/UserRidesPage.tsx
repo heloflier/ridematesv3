@@ -6,7 +6,7 @@ import RidesList from '../components/dashboard/RidesList';
 import { USER_RIDES, CREATE_RIDE } from '../helper_assets/menu-paths';
 import { StoreContext } from '../stores/store-context';
 
-function UserRidesPage() {
+export const UserRidesPage: React.FC = () => {
   const store = useContext(StoreContext);
   store.setCurrentPage(USER_RIDES);
 
@@ -42,10 +42,8 @@ function UserRidesPage() {
       <RidesList ridesList={ridesList} />
     </div>
   );
-}
+};
 
 //   Navbar.propTypes = {
 //     classes: PropTypes.object.isRequired,
 //   };
-
-export default UserRidesPage;

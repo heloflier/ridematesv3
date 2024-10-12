@@ -1,5 +1,6 @@
 enum menuPaths {
     DASHBOARD = '',
+    LOGIN = 'login',
     PROFILE = 'profile',
     CREATE_RIDE = 'create-ride',
     EDIT_RIDE = 'edit-ride',
@@ -7,5 +8,5 @@ enum menuPaths {
     STRAVA = 'strava'
 }
 
-export const { DASHBOARD, PROFILE, CREATE_RIDE, EDIT_RIDE, STRAVA, USER_RIDES } = menuPaths;
+export const { DASHBOARD, LOGIN, PROFILE, CREATE_RIDE, EDIT_RIDE, STRAVA, USER_RIDES } = menuPaths;
 export default menuPaths;

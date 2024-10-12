@@ -1,12 +1,16 @@
+
+// this code has been modified from https://dev.to/salarc123/mern-stack-authentication-tutorial-part-1-the-backend-1c57
+// review when using verifyUser
+
 import { Router, Request, Response, NextFunction } from "express";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from '../models/User';
+import { verifyJWT } from "../auth/verifyJWT";
 
 const { JWT_SECRET } = process.env as { JWT_SECRET: string };
 
 interface RequestWithBody extends Request {
-	// body: { [key: string]: string | undefined }
 	body: { [key: string]: string }
 }
 
@@ -41,30 +45,14 @@ router.get('/register', (req: Request, res: Response) => {
 	`);
 });
 
-router.get('/login', (req: Request, res: Response) => {
-	res.send(`
-		<form method="POST">
-			<div>
-				<label>Email</label>
-				<input name="email" />
-			</div>
-			<div>
-				<label>Password</label>
-				<input name="password" type="password" />
-			</div>
-			<button>Submit</button>
-		</form>
-	`);
-});
-
 router.post('/register', async (req: RequestWithBody, res: Response) => {
   console.log('----------- POST register: ', req.body);
+	console.log('email: ', req.body.email);
 
 	// check if user is already in the db and send them to the login page if they are
-	console.log('email: ', req.body.email);
-	const takenEmail = await User.findOne({ email: req.body.email })
+	const existingUser = await User.findOne({ email: req.body.email });
 	
-	if (takenEmail) {
+	if (existingUser) {
 		console.log('------------------- User already exists');
 		res.json({ message: 'User already exists' });
 	} 
@@ -76,7 +64,6 @@ router.post('/register', async (req: RequestWithBody, res: Response) => {
 			console.log('user: ', user);
 			await user.save();
 			res.status(201).json({ message: 'User created' });
-			// res.redirect('/logout');
 		}
 		catch (err) {
 			res.status(500).json({ message: `registration failed - ${err}` });
@@ -86,9 +73,6 @@ router.post('/register', async (req: RequestWithBody, res: Response) => {
 
 router.post('/login', (req: RequestWithBody, res: Response) => {
 	const { email: loginEmail, password: loginPassword } = req.body;
-	console.log('----------- loginEmail: ', loginEmail);
-	console.log('----------- loginPassword: ', loginPassword);
-	// res.send(res);
 
 	User.findOne({ email: loginEmail })
 		.then(user => {
@@ -109,15 +93,16 @@ router.post('/login', (req: RequestWithBody, res: Response) => {
 			bcrypt.compare(loginPassword, user.password)
 				.then(isMatch => {
 					if (isMatch) {
-						const payload = {
-							id: user.id,
-						}
+						const payload = {	id: user._id,	};
+						// req.session = { isLoggedIn: true };
 						jwt.sign(
 							payload, 
 							JWT_SECRET, 
 							{ expiresIn: 86400 }, 
 							(err, token) => {
 								if (err) return res.json({ message: err });
+								console.log('**************** user logged in ');
+								res.set('Authorization', 'Bearer ' + token);
 								return res.status(200).json({ message: 'user logged in', token: 'Bearer ' + token });
 							}
 						);
@@ -127,37 +112,21 @@ router.post('/login', (req: RequestWithBody, res: Response) => {
 					}
 				})
 				.catch(err => {
-					console.log('++++++++++++++++ loginPassword: ', loginPassword);
-					console.log('**************** user.password: ', user.password);
 					console.log('err: ', err);
 					res.status(500).json({ message: `login failed - ${err}` });
 				});
 		});
 });
 
-// TODO: this get is not needed after the front end is done: react will take care of that
-// router.get('/', (req: Request, res: Response) => {
-// 	if (req.session && req.session.loggedIn) {
-// 		res.send(`
-// 			<div>
-// 				You are logged in
-// 				<a href="/logout">Log Out</a>
-// 			</div>
-// 		`);
-// 	}
-// 	else {
-// 		res.send(`
-// 			<div>
-// 				You are not logged in
-// 				<a href="/login">Log In</a>
-// 			</div>
-// 		`);
-// 	}
-// });
+router.get('/isUserAuth', verifyJWT, (req: RequestWithBody, res: Response) => {
+	console.log('req: ', req.body);
 
-// TODO: delete the token from localStorage 
+	res.status(200).json({ isLoggedIn: true });
+});
+
+// TODO: delete the token from sessionStorage 
 // (which can be done through a simple button click that calls 
-// localStorage.removeItem("token"));
+// sessionStorage.removeItem("token"));
 
 // --- OLD LOGOUT ROUTE - to be deleted ---
 // router.get('/logout', (req: Request, res: Response) => {
