@@ -14,11 +14,12 @@ router.get('/all', async (req: Request, res: Response) => {
 	console.log('-----------  GET ALL rides', req.body);
 	const allRides = await Ride.find();
 	res.json(allRides);
-	console.log('************* rides: ', allRides);
+	// console.log('************* rides: ', allRides);
 });
 
 router.get('/allByUser/:id', async (req: Request, res: Response) => {
 	console.log('-----------  GET ALL rides for one user', req.body);
+	console.log('req.params.id: ', req.params.id);
 	const allRides = await Ride.find({ 'createdById': req.params.id }).exec();
 	res.json(allRides);
 	console.log('************* rides: ', allRides);

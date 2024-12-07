@@ -14,7 +14,7 @@ export const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
 
   console.log('verifyJWT');
 
-  console.log('****** req.headers: ', req.headers);
+  // console.log('****** req.headers: ', req.headers);
   const token = (req.headers['authorization']  as string)?.split(' ')[1];
   console.log('**** token: ', token);
 
@@ -34,6 +34,8 @@ export const verifyJWT = (req: Request, res: Response, next: NextFunction) => {
         email: decodedToken.email,
         username: decodedToken.username
       };
+
+      console.log('yes token, next function ****************************************');
     
       next();
     });

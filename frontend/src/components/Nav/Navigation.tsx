@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import {
   DropdownItem,
   DropdownToggle,
@@ -12,15 +12,15 @@ import {
   NavLink,
   UncontrolledDropdown
 } from 'reactstrap';
-import navigationMenuItems from '../../helper_assets/navigation-menu';
+import navigationMenuItems from '../../helpers/assets/navigation-menu';
 import { observer } from 'mobx-react-lite';
-import { StoreContext } from '../../stores/store-context';
+import { useStores } from '../../stores/store-context';
 import { AuthButton } from './AuthButton';
 
 export const Navigation = observer(() => {
   const [toggle, setToggle] = useState(false);
-
-  const store = useContext(StoreContext);
+  const store = useStores();
+  const { authStore } = store;
 
   const renderNavItems = navigationMenuItems
     .filter((menuItem) => menuItem.navItemPath !== store.currentPage)
@@ -35,6 +35,31 @@ export const Navigation = observer(() => {
         </NavItem>
       );
     });
+
+  // Filter dropdown items based on auth state
+  const renderDropdownItems = () => (
+    <>
+      {authStore.isAuthenticated && (
+        <DropdownItem className='color-primary'>
+          <NavLink href='/profile' className='text-dark'>
+            Profiles
+          </NavLink>
+        </DropdownItem>
+      )}
+      {authStore.isAuthenticated && (
+        <DropdownItem>
+          <NavLink href='/ride' className='text-dark'>
+            Ride
+          </NavLink>
+        </DropdownItem>
+      )}
+      <DropdownItem>
+        <NavLink href='https://www.strava.com/' className='text-dark'>
+          Strava
+        </NavLink>
+      </DropdownItem>
+    </>
+  );
 
   return (
     <Navbar dark expand='md' className='std-theme heading-primary'>
@@ -55,27 +80,10 @@ export const Navigation = observer(() => {
               Options
             </DropdownToggle>
             <DropdownMenu end>
-              <DropdownItem className='color-primary'>
-                <NavLink href='/profile' className='text-dark'>
-                  Profiles
-                </NavLink>
-              </DropdownItem>
-              <DropdownItem>
-                <NavLink href='/ride' className='text-dark'>
-                  Ride
-                </NavLink>
-              </DropdownItem>
-              <DropdownItem>
-                <NavLink href='https://www.strava.com/' className='text-dark'>
-                  Strava
-                </NavLink>
-              </DropdownItem>
+              {renderDropdownItems()}
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
-        {/* <Link to={`/${LOGIN}`} className='text-white me-3'>
-          Log In
-        </Link> */}
         <NavLink href='/login' className='text-white me-3'>
           <AuthButton />
         </NavLink>

@@ -4,9 +4,11 @@ import { Button } from 'reactstrap';
 
 import RidesList from '../components/dashboard/RidesList';
 import { StoreContext } from '../stores/store-context';
-import { DASHBOARD, CREATE_RIDE } from '../helper_assets/menu-paths';
+import { DASHBOARD, CREATE_RIDE } from '../helpers/assets/menu-paths';
 
 export const DashboardPage = () => {
+
+  // TODO: redirect to login page if user is not logged in
 
   const store = useContext(StoreContext);  
   
@@ -18,6 +20,7 @@ export const DashboardPage = () => {
   
   useEffect(() => {
     const apiUrl = '/api/ride/all';
+    console.log('dashboard Page - store.currentUserId: ', store.currentUserId);
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -27,7 +30,7 @@ export const DashboardPage = () => {
       .catch((error) => {
         console.error('Dashboard Error:', error);
       });
-  }, []);
+  }, [store.currentUserId]);
 
   return (
     <div>

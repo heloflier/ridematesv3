@@ -25,24 +25,28 @@ export interface RideFormProps {
   readOnly?: boolean;
 }
 
-function RideProfile(props: { location: string; createRide: boolean }) {
+function RideProfile({ location, createRide, userId }: { 
+  location: string; 
+  createRide: boolean; 
+  userId: string 
+}): JSX.Element {
   const [rideData, setRideData] = useState({});
-  const [readOnly, setReadOnly] = useState(!props.createRide);
+  const [readOnly, setReadOnly] = useState(!createRide);
 
   const navigate = useNavigate();
 
   // TODO: the following is just an experiment to test the db. modify when done.
-  useEffect(() => {
-    const rideId = '6504c7fc0afe1183e4538209';
-    const apiUrl = `/api/ride/${rideId}`;
+  // useEffect(() => {
+  //   const rideId = '6504c7fc0afe1183e4538209';
+  //   const apiUrl = `/api/ride/${rideId}`;
 
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((ride) => setRideData(ride))
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  }, []);
+  //   fetch(apiUrl)
+  //     .then((response) => response.json())
+  //     .then((ride) => setRideData(ride))
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //     });
+  // }, []);
 
   const useFormReturn = useForm<FormFields>({
     mode: 'all',
@@ -51,7 +55,8 @@ function RideProfile(props: { location: string; createRide: boolean }) {
 
   const onFormSubmit = (data: any) => {
     // TODO: add the userId as createdById to the data when it is available
-    data.createdById = '64275075798a59db3b803cba';
+    data.createdById = userId;
+    console.log('rideProfile - userId: ', userId);
     // TODO: don't submit on page load/refresh
     // e.preventDefault();
 

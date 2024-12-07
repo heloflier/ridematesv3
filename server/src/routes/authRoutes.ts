@@ -103,7 +103,11 @@ router.post('/login', (req: RequestWithBody, res: Response) => {
 								if (err) return res.json({ message: err });
 								console.log('**************** user logged in ');
 								res.set('Authorization', 'Bearer ' + token);
-								return res.status(200).json({ message: 'user logged in', token: 'Bearer ' + token });
+								return res.status(200).json({ 
+									message: 'user logged in',
+                  id: user._id,
+                  token: 'Bearer ' + token
+                });
 							}
 						);
 					}
@@ -119,6 +123,7 @@ router.post('/login', (req: RequestWithBody, res: Response) => {
 });
 
 router.get('/isUserAuth', verifyJWT, (req: RequestWithBody, res: Response) => {
+	console.log('/////// isUserAuth: ');
 	console.log('req: ', req.body);
 
 	res.status(200).json({ isLoggedIn: true });
