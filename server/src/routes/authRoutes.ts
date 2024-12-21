@@ -26,25 +26,6 @@ function requireAuth(req: Request, res: Response, next: NextFunction): void {
 
 const router = Router();
 
-// TODO: this get is not needed after the front end is done: react will take care of that
-// and we can just modify the post to send the token in the header and check if user  
-// already exists in the db
-router.get('/register', (req: Request, res: Response) => {
-	res.send(`
-		<form method="POST">
-			<div>
-        <label>Email</label>
-        <input name="email" />
-			</div>
-			<div>
-				<label>Password</label>
-				<input name="password" type="password" />
-			</div>
-			<button>Submit</button>
-		</form>
-	`);
-});
-
 router.post('/register', async (req: RequestWithBody, res: Response) => {
   console.log('----------- POST register: ', req.body);
 	console.log('email: ', req.body.email);

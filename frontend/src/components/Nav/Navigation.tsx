@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, NavLink as RouterNavLink } from 'react-router-dom';
 import {
   DropdownItem,
   DropdownToggle,
@@ -25,13 +26,13 @@ export const Navigation = observer(() => {
   const renderNavItems = navigationMenuItems
     .filter((menuItem) => menuItem.navItemPath !== store.currentPage)
     .map((menuItem, index) => {
-      let { navItemTitle, navItemPath, navItemUrl } = menuItem;
+      let { navItemTitle, navItemPath } = menuItem;
 
       return (
         <NavItem key={index} className='mx-3'>
-          <NavLink href={`${navItemUrl ? navItemUrl : '/' + navItemPath}`}>
+          <Link to={`/${navItemPath}`} className='nav-link'>
             {navItemTitle}
-          </NavLink>
+          </Link>
         </NavItem>
       );
     });
@@ -41,16 +42,16 @@ export const Navigation = observer(() => {
     <>
       {authStore.isAuthenticated && (
         <DropdownItem className='color-primary'>
-          <NavLink href='/profile' className='text-dark'>
+          <RouterNavLink to="/profile" className='text-dark'>
             Profiles
-          </NavLink>
+          </RouterNavLink>
         </DropdownItem>
       )}
       {authStore.isAuthenticated && (
         <DropdownItem>
-          <NavLink href='/ride' className='text-dark'>
+          <RouterNavLink to="/ride" className='text-dark'>
             Ride
-          </NavLink>
+          </RouterNavLink>
         </DropdownItem>
       )}
       <DropdownItem>
@@ -64,7 +65,8 @@ export const Navigation = observer(() => {
   return (
     <Navbar dark expand='md' className='std-theme heading-primary'>
       <NavbarBrand
-        href='/'
+        tag={RouterNavLink}
+        to='/'
         className='heading-primary--brand fs-1 fst-italic px-5'
       >
         RIDEMATES
@@ -84,9 +86,9 @@ export const Navigation = observer(() => {
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>
-        <NavLink href='/login' className='text-white me-3'>
+        <RouterNavLink to="/login" className='text-white me-3'>
           <AuthButton />
-        </NavLink>
+        </RouterNavLink>
       </Collapse>
     </Navbar>
   );
