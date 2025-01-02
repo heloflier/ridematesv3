@@ -4,17 +4,23 @@ import { Button } from 'reactstrap';
 
 import RidesList from '../components/dashboard/RidesList';
 import { StoreContext } from '../stores/store-context';
-import { DASHBOARD, CREATE_RIDE } from '../helper_assets/menu-paths';
+import { DASHBOARD, CREATE_RIDE } from '../helpers/assets/menu-paths';
 
-const DashboardPage = () => {
+export const DashboardPage = () => {
+
+  // TODO: redirect to login page if user is not logged in
 
   const store = useContext(StoreContext);  
-  store.setCurrentPage(DASHBOARD);
-
+  
+  useEffect(() => {
+    store.setCurrentPage(DASHBOARD);
+  }, [store]);
+  
   const [ridesList, setRidesList] = useState([]);
-
+  
   useEffect(() => {
     const apiUrl = '/api/ride/all';
+    console.log('dashboard Page - store.currentUserId: ', store.currentUserId);
 
     fetch(apiUrl)
       .then((response) => response.json())
@@ -22,9 +28,9 @@ const DashboardPage = () => {
         setRidesList(allRides)
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error('Dashboard Error:', error);
       });
-  }, []);
+  }, [store.currentUserId]);
 
   return (
     <div>
@@ -48,5 +54,3 @@ const DashboardPage = () => {
 //   Navbar.propTypes = {
 //     classes: PropTypes.object.isRequired,
 //   };
-  
-export default DashboardPage;

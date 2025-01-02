@@ -29,6 +29,9 @@ export interface userFormProps {
   readOnly?: boolean;
 }
 
+// TODO: rework to extract the user id from the stored jwt token in case of page reload.
+//       This has to be done on the create ride page as well.
+
 function UserProfile() {
   const [user, setUser] = useState({});
   const [isValidating, setisValidating] = useState([]);
@@ -56,13 +59,19 @@ function UserProfile() {
     }
   });
 
-  // TODO: the following is just an experiment to test the db. modify when done.
   useEffect(() => {
     const userId = '64275075798a59db3b803cba';
-    axios.get(`/api/user/${userId}`).then((res) => {
-      console.log('user: ', res.data);
-      setUser(res.data);
-    });
+
+    fetch(`/api/user/${userId}`, {
+      method: 'GET'
+      // credentials: 'include' // This includes cookies in the request
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('user --- : ', data);
+        setUser(data);
+      })
+      .catch((error) => console.error('Error fetching user data:', error));
   }, []);
 
   const {
@@ -76,13 +85,6 @@ function UserProfile() {
     // e.preventDefault();
     await data;
     console.log('**************** in create user', data);
-    // axios
-    //   .post('/api/user/create')
-    //   .then(res => {
-    //     setUser(res.data);
-    //     console.log(res.data);
-    //   }
-    // );
     reset(data);
     setReadOnly(true);
     // navigate('/');

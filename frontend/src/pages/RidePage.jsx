@@ -2,13 +2,17 @@ import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom'
 
 import RideProfile from '../components/ride/RideProfile';
-import { CREATE_RIDE, DASHBOARD, EDIT_RIDE } from '../helper_assets/menu-paths';
+import { CREATE_RIDE, DASHBOARD, EDIT_RIDE } from '../helpers/assets/menu-paths';
 import { StoreContext } from '../stores/store-context';
 
-function RidePage(props) {
+// TODO: rework to extract the user id from the stored jwt token in case of page reload.
+//       This has to be done on the user profile page as well.
+
+export const RidePage = (props) => {
 
   const store = useContext(StoreContext);
-  const location = useLocation()
+  console.log('ridePage - store.currentUserId: ', store.currentUserId);
+  const location = useLocation();
 
   let createRide = false;
   if (location.pathname === "/create-ride") {
@@ -24,9 +28,7 @@ function RidePage(props) {
 
   return (
     <div>
-      <RideProfile createRide={createRide} />
+      <RideProfile createRide={createRide} userId={store.currentUserId} />
     </div>
   );
 }
-
-export default RidePage;

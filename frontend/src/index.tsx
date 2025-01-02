@@ -11,11 +11,12 @@ import { createStores } from './stores';
 import { StoreProvider } from './stores/store-context';
 
 const stores = createStores();
+console.warn('====================================\n stores initialization in index.tsx \n====================================');
 
 ReactDOM.render(
   <StrictMode>
     <StoreProvider value={stores}>
-      <App />
+        <App />
     </StoreProvider>
   </StrictMode>,
   document.getElementById('root')

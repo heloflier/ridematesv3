@@ -1,8 +1,10 @@
 
 import { Router, Request, Response} from 'express';
+import { verifyJWT } from '../auth/verifyJWT';
 import Ride from '../models/Ride';
 
 const router = Router();
+
 
 //=================================================
 // 	Requests for a Ride
@@ -19,6 +21,7 @@ router.get('/all', async (req: Request, res: Response) => {
 
 router.get('/allByUser/:id', async (req: Request, res: Response) => {
 	console.log('-----------  GET ALL rides for one user', req.body);
+	console.log('req.params.id: ', req.params.id);
 	const allRides = await Ride.find({ 'createdById': req.params.id }).exec();
 	res.json(allRides);
 	console.log('************* rides: ', allRides);

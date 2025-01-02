@@ -9,8 +9,11 @@ const { Schema, model } = mongoose;
 // const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new Schema({
-	userName: 	String,
-	password: 	String,
+	id: 				String,
+	password: {
+		type: String,
+		required: true
+	},
 	imageUrl: 	String, 
 	firstName: 	String,
 	lastName: 	String,
@@ -19,7 +22,10 @@ const userSchema = new Schema({
 	city: 			String,
 	state: 			String,
 	zipcode: 		Number,
-	email: 			String,
+	email: {
+		type: String,
+		required: true
+	},
 	phoneNum: 	Number,
 	notify:			Boolean,
 	radius: 		Number,
